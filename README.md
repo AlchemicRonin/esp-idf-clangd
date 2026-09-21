@@ -1,13 +1,12 @@
 # ESP-IDF clangd pipeline
 
-Portable clangd setup for ESP-IDF projects on macOS, Linux, and Windows. It
-creates a separate Clang compilation database in `build.clang`; it does not
-replace the project's normal ESP-IDF `build` directory.
+Portable clangd setup for ESP-IDF projects on macOS, Linux, and Windows.
+It creates an ignored `build.clang` database and leaves the normal `build`
+directory unchanged.
 
-## Install into a project
+## Install
 
-Clone or extract this repository inside the target ESP-IDF project, then run an
-installer from the pipeline directory:
+Clone or extract this repository in the target project, then run:
 
 ```bash
 ./install.sh
@@ -19,8 +18,7 @@ On Windows:
 install.bat
 ```
 
-Pass the target project directory as the first argument when the pipeline is
-stored elsewhere:
+When this repository is outside the target project:
 
 ```bash
 ./install.sh /path/to/esp-idf-project
@@ -36,50 +34,33 @@ scripts/reconfigure-clang.bat
 .vscode/tasks.json
 ```
 
-It appends `build.clang/` to `.gitignore`. Existing files are never overwritten;
-the installer reports any files that need a manual merge.
+It adds `build.clang/` to `.gitignore`. Existing files are not overwritten.
 
-## Generate the database
-
-From the target project root:
+## Generate
 
 ```bash
 ./scripts/reconfigure-clang.sh
 ```
 
-On Windows:
-
 ```bat
 scripts\reconfigure-clang.bat
 ```
 
-The scripts use an active ESP-IDF environment or the standard ESP-IDF
-installation location. Regenerate the database after changing the target,
-`sdkconfig`, CMake/component dependencies, or ESP-IDF version.
+Run again after changing the target, `sdkconfig`, CMake dependencies, or
+ESP-IDF version.
 
 ## Editors
 
-- **Neovim:** Configure `esp32.nvim` once in your user configuration, then run
-  `:ESPReconfigure` for a target project.
-- **VS Code:** Install the
-  [clangd extension](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd).
-  Run the **ESP-IDF: Reconfigure clangd database** workspace task, then reload
-  the VS Code window. Configure Espressif clangd in VS Code user settings, or
-  start VS Code from an activated ESP-IDF environment where `clangd` is on
-  `PATH`.
+- **Neovim:** Configure `esp32.nvim` in user settings and use
+  `:ESPReconfigure`.
+- **VS Code:** Install the [clangd extension](https://marketplace.visualstudio.com/items?itemName=llvm-vs-code-extensions.vscode-clangd),
+  configure Espressif clangd in user settings, then run **ESP-IDF:
+  Reconfigure clangd database** and reload the window.
 
-The workspace disables the Microsoft C/C++ IntelliSense engine so it does not
-parse ESP-IDF headers as host-platform code. Use clangd as the sole C/C++
-language engine for ESP-IDF. Without the clangd extension, completion,
-diagnostics, go-to-definition, references, and rename are unavailable.
+The workspace disables Microsoft C/C++ IntelliSense to prevent host-platform
+parsing; clangd supplies completion, diagnostics, navigation, and rename.
 
-## Troubleshooting
+## Recovery
 
-If completion or navigation is incomplete after updating ESP-IDF or Espressif
-clangd, close the editor and delete `build.clang/.cache/clangd/index`. Restart
-the editor to rebuild the index. Regenerate `build.clang` first if its
-compilation database is missing or outdated.
-
-The project templates contain no user names, absolute paths, or ESP-IDF version
-numbers. Tool locations belong in editor user settings and are discovered
-locally on each machine.
+If navigation is incomplete after an ESP-IDF or clangd update, close the editor,
+delete `build.clang/.cache/clangd/index`, and reopen it.
