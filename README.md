@@ -32,8 +32,8 @@ The installer adds only these portable files when they do not already exist:
 .clangd
 scripts/reconfigure-clang.sh
 scripts/reconfigure-clang.bat
+.vscode/settings.json
 .vscode/tasks.json
-.vscode/c_cpp_properties.json
 ```
 
 It appends `build.clang/` to `.gitignore`. Existing files are never overwritten;
@@ -64,6 +64,10 @@ installation location. Regenerate the database after changing the target,
 - **VS Code:** Run the **ESP-IDF: Reconfigure clangd database** workspace task.
   Configure Espressif clangd in VS Code user settings, or start VS Code from an
   activated ESP-IDF environment where `clangd` is on `PATH`.
+
+The workspace disables the Microsoft C/C++ IntelliSense engine so it does not
+parse ESP-IDF headers as host-platform code. Use clangd as the sole C/C++
+language engine for ESP-IDF.
 
 The project templates contain no user names, absolute paths, or ESP-IDF version
 numbers. Tool locations belong in editor user settings and are discovered

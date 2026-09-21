@@ -11,7 +11,7 @@ call :copy_if_missing "%PIPELINE_ROOT%template\.clangd" "%TARGET_ROOT%\.clangd"
 call :copy_if_missing "%PIPELINE_ROOT%template\reconfigure-clang.sh" "%TARGET_ROOT%\scripts\reconfigure-clang.sh"
 call :copy_if_missing "%PIPELINE_ROOT%template\reconfigure-clang.bat" "%TARGET_ROOT%\scripts\reconfigure-clang.bat"
 call :copy_if_missing "%PIPELINE_ROOT%template\tasks.json" "%TARGET_ROOT%\.vscode\tasks.json"
-call :copy_if_missing "%PIPELINE_ROOT%template\c_cpp_properties.json" "%TARGET_ROOT%\.vscode\c_cpp_properties.json"
+call :copy_if_missing "%PIPELINE_ROOT%template\settings.json" "%TARGET_ROOT%\.vscode\settings.json"
 
 findstr /x /c:"build.clang/" "%TARGET_ROOT%\.gitignore" >nul 2>nul
 if errorlevel 1 (

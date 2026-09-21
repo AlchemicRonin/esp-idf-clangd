@@ -27,7 +27,7 @@ copy_if_missing "${pipeline_root}/template/.clangd" "${target_root}/.clangd"
 copy_if_missing "${pipeline_root}/template/reconfigure-clang.sh" "${target_root}/scripts/reconfigure-clang.sh"
 copy_if_missing "${pipeline_root}/template/reconfigure-clang.bat" "${target_root}/scripts/reconfigure-clang.bat"
 copy_if_missing "${pipeline_root}/template/tasks.json" "${target_root}/.vscode/tasks.json"
-copy_if_missing "${pipeline_root}/template/c_cpp_properties.json" "${target_root}/.vscode/c_cpp_properties.json"
+copy_if_missing "${pipeline_root}/template/settings.json" "${target_root}/.vscode/settings.json"
 
 chmod +x "${target_root}/scripts/reconfigure-clang.sh"
 
