@@ -1,0 +1,14 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "ESP-IDF: Reconfigure clangd database",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/reconfigure-clang.sh",
+      "windows": {
+        "command": "${workspaceFolder}\\scripts\\reconfigure-clang.bat"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
